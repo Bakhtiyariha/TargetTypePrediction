@@ -1,0 +1,126 @@
+﻿<Application x:Class="TargetTypePrediction.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:TargetTypePrediction"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+
+        <!--Style for Slider-->
+        <Style TargetType="Slider" x:Key="SliderStyle">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="400"/>
+            <!--<Setter Property="IsSnapToTickEnabled" Value="True"/>-->
+            <Setter Property="IsMoveToPointEnabled" Value="True"/>
+            <Setter Property="TickPlacement" Value="BottomRight"/>
+        </Style>
+
+        <!--Style for TextBlock-->
+        <Style TargetType="TextBlock" x:Key="TextBlockStyle">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="Gray"/>
+        </Style>
+
+        <!--Style for TextBlock-->
+        <Style TargetType="TextBlock" x:Key="ShowParameterTextBlockStyle">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="5 0"/>
+            <Setter Property="Foreground" Value="DarkSlateBlue"/>
+        </Style>
+
+        <!-- Style for Labels -->
+        <Style TargetType="Label" x:Key="LeftTitleLabelStyle">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="DarkSlateBlue"/>
+        </Style>
+
+        <!-- Style for StackPanel -->
+        <Style TargetType="StackPanel">
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="10 0"/>
+        </Style>
+
+        <!-- Style for StackPanel -->
+        <Style TargetType="RadioButton" x:Key="TargetIntentRdbStyle">
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Height" Value="30"/>
+            <!--<Setter Property="GroupName" Value="Choices"/>-->
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="Gray"/>
+
+        </Style>
+
+        <!-- Style for images -->
+        <Style TargetType="Image" x:Key="TargetImageStyle">
+            <Setter Property="Width" Value="45"/>
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <!--<Setter Property="Margin" Value="25 0"/>-->
+        </Style>
+
+        <!-- Style for ProgressBar -->
+        <Style TargetType="ProgressBar" x:Key="PercentProgressBar">
+            <Setter Property="Width" Value="500"/>
+            <Setter Property="Height" Value="5"/>
+            <Setter Property="Minimum" Value="0"/>
+            <Setter Property="Maximum" Value="100"/>
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Foreground" Value="DarkRed"/>
+        </Style>
+
+        <!-- Style for ProgressBar -->
+        <Style TargetType="Button" x:Key="ButtonStyle">
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="DarkSlateGray"/>
+            <Setter Property="BorderBrush" Value="DarkRed"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="2"/>
+        </Style>
+
+
+
+        <!-- Style for CheckBox -->
+        <!--<Style x:Key="LargeCheckBox" TargetType="CheckBox">
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Grid>
+                            <Border Width="20" Height="20" BorderBrush="Black" BorderThickness="2">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>-->
+
+
+    </Application.Resources>
+</Application>

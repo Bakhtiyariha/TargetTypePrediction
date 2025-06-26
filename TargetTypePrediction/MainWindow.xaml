@@ -1,0 +1,378 @@
+﻿<Window x:Class="TargetTypePrediction.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TargetTypePrediction"
+        mc:Ignorable="d"
+        Title="Target Type Prediction" Height="670" Width="800" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Icon="/Images/icon.png" Loaded="MainWindow_OnLoaded">
+
+    <Grid Height="650">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!--TitleRow-->
+        <Grid Grid.Row="0" Background="CornflowerBlue" x:Name="TitleRow">
+            <Label x:Name="lblTitle" Content="Target Prediction By Radar" ToolTip="پیش بینی نوع هدف با استفاده از مختصات راداری" VerticalAlignment="Center"
+                   HorizontalAlignment="Center" FontWeight="Bold" FontSize="20"/>
+        </Grid>
+
+        <!--RangeRow-->
+        <Grid Grid.Row="1" x:Name="RangeRow" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="185"/>
+                <!--<ColumnDefinition Width="70"/>-->
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="70"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" x:Name="lblRange" Content="Range(m) :" ToolTip="برد هدف" Style="{StaticResource LeftTitleLabelStyle}"/>
+            <!--<TextBox Grid.Column="1" x:Name="txtRange" Background="LightGray" HorizontalAlignment="Center" VerticalAlignment="Center" Width="90"
+                      FontWeight="Bold" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                      PreviewTextInput="TxtRange_OnPreviewTextInput" 
+                      TextChanged="TxtRange_OnTextChanged"/>-->
+
+            <StackPanel Grid.Column="1" Style="{StaticResource {x:Type StackPanel}}">
+                <TextBlock Text="{Binding ElementName=sldRange, Path=Minimum}" Style="{StaticResource TextBlockStyle}"/>
+                <Slider x:Name="sldRange" Maximum="27000" Minimum="200" TickFrequency="1000" Value="5000" Style="{StaticResource SliderStyle}"/>
+                <TextBlock Text="{Binding ElementName=sldRange, Path=Maximum}" Style="{StaticResource TextBlockStyle}"/>
+            </StackPanel>
+
+            <TextBlock Grid.Column="2" x:Name="txbShowRange" Text="{Binding ElementName=sldRange,Path=Value,StringFormat=F2,Mode=TwoWay}" Style="{StaticResource ShowParameterTextBlockStyle}"/>
+        </Grid>
+
+        <!--RCSRow-->
+        <Grid Grid.Row="2" x:Name="RCSRow" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="70"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" x:Name="lblRCS" Content="RCS(sq.m) :" ToolTip="سطح مقطع راداری" Style="{StaticResource LeftTitleLabelStyle}"/>
+            <StackPanel Grid.Column="1" Style="{StaticResource {x:Type StackPanel}}">
+                <TextBlock Text="{Binding ElementName=sldRCS, Path=Minimum}" Style="{StaticResource TextBlockStyle}"/>
+
+                <Slider x:Name="sldRCS" Maximum="20" Minimum="0" TickFrequency="0.5" Value="5" Style="{StaticResource SliderStyle}"/>
+                <TextBlock Text="{Binding ElementName=sldRCS, Path=Maximum}" Style="{StaticResource TextBlockStyle}"/>
+
+            </StackPanel>
+            <TextBlock Grid.Column="2" x:Name="txbShowRCS" Text="{Binding ElementName=sldRCS,Path=Value,StringFormat=F2,Mode=TwoWay}"
+                       Style="{StaticResource ShowParameterTextBlockStyle}"/>
+        </Grid>
+
+        <!--SpeedRow-->
+        <Grid Grid.Row="3" x:Name="SpeedRow" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="185"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="70"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" x:Name="lblSpeed" Content="Speed(m.s) :" ToolTip="سرعت هدف" Style="{StaticResource LeftTitleLabelStyle}"/>
+
+            <StackPanel Grid.Column="1" Style="{StaticResource {x:Type StackPanel}}">
+                <TextBlock Text="{Binding ElementName=sldSpeed, Path=Minimum}" Style="{StaticResource TextBlockStyle}"/>
+                <Slider x:Name="sldSpeed" Maximum="900" Minimum="0" TickFrequency="30" Value="150" Style="{StaticResource SliderStyle}"/>
+                <TextBlock Text="{Binding ElementName=sldSpeed, Path=Maximum}" Style="{StaticResource TextBlockStyle}"/>
+
+            </StackPanel>
+            <TextBlock Grid.Column="2" x:Name="txbShowSpeed" Text="{Binding ElementName=sldSpeed,Path=Value,StringFormat=F2,Mode=TwoWay}"
+                       Style="{StaticResource ShowParameterTextBlockStyle}"/>
+        </Grid>
+
+        <!--AzimuthRow-->
+        <Grid Grid.Row="4" x:Name="AzimuthRow" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="185"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="70"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" x:Name="lblAzimuth" Content="Azimuth(deg) :" ToolTip="سمت هدف" Style="{StaticResource LeftTitleLabelStyle}"/>
+
+            <StackPanel Grid.Column="1" Style="{StaticResource {x:Type StackPanel}}">
+                <TextBlock Text="{Binding ElementName=sldAzimuth, Path=Minimum}" Style="{StaticResource TextBlockStyle}"/>
+
+                <Slider x:Name="sldAzimuth" Maximum="360" Minimum="0" TickFrequency="10" Value="150" Style="{StaticResource SliderStyle}"/>
+                <TextBlock Text="{Binding ElementName=sldAzimuth, Path=Maximum}" Style="{StaticResource TextBlockStyle}"/>
+
+            </StackPanel>
+
+            <TextBlock Grid.Column="2" x:Name="txbShowAzimuth" Text="{Binding ElementName=sldAzimuth,Path=Value,StringFormat=F2,Mode=TwoWay}"
+                       Style="{StaticResource ShowParameterTextBlockStyle}"/>
+        </Grid>
+
+        <!--HeightRow-->
+        <Grid Grid.Row="5" x:Name="HeightRow" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="185"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="70"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" x:Name="lblHeight" Content="Height(Deg) :" ToolTip="بلندی از سطح رادار" Style="{StaticResource LeftTitleLabelStyle}"/>
+
+            <StackPanel Grid.Column="1" Style="{StaticResource {x:Type StackPanel}}">
+                <TextBlock Text="{Binding ElementName=sldHeight, Path=Minimum}" Style="{StaticResource TextBlockStyle}"/>
+
+                <Slider x:Name="sldHeight" Maximum="78" Minimum="-6" TickFrequency="1" Value="4" Style="{StaticResource SliderStyle}"/>
+                <TextBlock Text="{Binding ElementName=sldHeight, Path=Maximum}" Style="{StaticResource TextBlockStyle}"/>
+
+            </StackPanel>
+            <TextBlock Grid.Column="3" x:Name="txbShowHeight" Text="{Binding ElementName=sldHeight,Path=Value,StringFormat=F2,Mode=TwoWay}"
+                       Style="{StaticResource ShowParameterTextBlockStyle}"/>
+        </Grid>
+
+        <!--AltitudeRow-->
+        <Grid Grid.Row="6" x:Name="AltitudeRow" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="185"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="70"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" x:Name="lblAltitude" Content="Altitude(m) :" ToolTip="ارتفاع از سطح دریا" Style="{StaticResource LeftTitleLabelStyle}"/>
+
+            <StackPanel Grid.Column="1" Style="{StaticResource {x:Type StackPanel}}">
+                <TextBlock Text="{Binding ElementName=sldAltitude, Path=Minimum}" Style="{StaticResource TextBlockStyle}"/>
+
+                <Slider x:Name="sldAltitude" Maximum="15000" Minimum="0" TickFrequency="300" Value="500" Style="{StaticResource SliderStyle}"/>
+                <TextBlock Text="{Binding ElementName=sldAltitude, Path=Maximum}" Style="{StaticResource TextBlockStyle}"/>
+
+            </StackPanel>
+            <TextBlock Grid.Column="3" x:Name="txbShowAltitude" Text="{Binding ElementName=sldAltitude,Path=Value,StringFormat=F2,Mode=TwoWay}"
+                       Style="{StaticResource ShowParameterTextBlockStyle}"/>
+        </Grid>
+
+        <!--Cross ParameterRow-->
+        <Grid Grid.Row="7" x:Name="CrossParameterRow" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="185"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="70"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" x:Name="lblCrossParameter" Content="CrossParameter(M) :" ToolTip="کراس پارامتر" Style="{StaticResource LeftTitleLabelStyle}"/>
+
+            <StackPanel Grid.Column="1" Style="{StaticResource {x:Type StackPanel}}">
+                <TextBlock Text="{Binding ElementName=sldCrossParameter, Path=Minimum}" Style="{StaticResource TextBlockStyle}"/>
+                <Slider x:Name="sldCrossParameter" Maximum="8000" Minimum="0" TickFrequency="200" Value="400" Style="{StaticResource SliderStyle}"/>
+                <TextBlock Text="{Binding ElementName=sldCrossParameter, Path=Maximum}" Style="{StaticResource TextBlockStyle}"/>
+
+            </StackPanel>
+
+            <TextBlock Grid.Column="3" x:Name="txbShowCrossParameter" Text="{Binding ElementName=sldCrossParameter,Path=Value,StringFormat=F2,Mode=TwoWay}"
+                       Style="{StaticResource ShowParameterTextBlockStyle}"/>
+        </Grid>
+
+        <!--SizeRow-->
+        <Grid Grid.Row="8" x:Name="SizeRow" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="185"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="70"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" x:Name="lblSize" Content="Size(m) :" ToolTip="ابعاد هدف" Style="{StaticResource LeftTitleLabelStyle}"/>
+
+            <StackPanel Grid.Column="1" Style="{StaticResource {x:Type StackPanel}}">
+                <TextBlock Text="{Binding ElementName=sldSize, Path=Minimum}" Style="{StaticResource TextBlockStyle}"/>
+                <Slider x:Name="sldSize" Maximum="80" Minimum="0.5" TickFrequency="5" Value="10" Style="{StaticResource SliderStyle}"/>
+                <TextBlock Text="{Binding ElementName=sldSize, Path=Maximum}" Style="{StaticResource TextBlockStyle}"/>
+
+            </StackPanel>
+
+            <TextBlock Grid.Column="3" x:Name="txbShowSize" Text="{Binding ElementName=sldSize,Path=Value,StringFormat=F2,Mode=TwoWay}"
+                       Style="{StaticResource ShowParameterTextBlockStyle}"/>
+        </Grid>
+
+        <!--ManeuverabilityRow-->
+        <Grid Grid.Row="9" x:Name="ManeuverabilityRow" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="185"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="70"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" x:Name="lblManeuverability" Content="Maneuverability(score) :" ToolTip="امتیاز میزان مانور پذیر بودن" Style="{StaticResource LeftTitleLabelStyle}"/>
+
+            <StackPanel Grid.Column="1" Style="{StaticResource {x:Type StackPanel}}">
+                <TextBlock Text="{Binding ElementName=sldManeuverability, Path=Minimum}" Style="{StaticResource TextBlockStyle}"/>
+                <Slider x:Name="sldManeuverability" Maximum="5" Minimum="1" TickFrequency="1" Value="2" Style="{StaticResource SliderStyle}"/>
+                <TextBlock Text="{Binding ElementName=sldManeuverability, Path=Maximum}" Style="{StaticResource TextBlockStyle}"/>
+
+            </StackPanel>
+
+            <TextBlock Grid.Column="3" x:Name="txbShowManeuverability" Text="{Binding ElementName=sldManeuverability,Path=Value,StringFormat=F2,Mode=TwoWay}"
+                       Style="{StaticResource ShowParameterTextBlockStyle}"/>
+        </Grid>
+
+        <!--EmissionSignatureRow-->
+        <Grid Grid.Row="10" x:Name="EmissionSignatureRow" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="70"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" x:Name="lblEmissionSignature" Content="EmissionSignature(score) :" ToolTip="امتیاز میزان رادار گریز بودن" Style="{StaticResource LeftTitleLabelStyle}"/>
+
+            <StackPanel Grid.Column="1" Style="{StaticResource {x:Type StackPanel}}">
+                <TextBlock Text="{Binding Minimum, ElementName=sldEmissionSignature}" Style="{StaticResource TextBlockStyle}"/>
+                <Slider x:Name="sldEmissionSignature" Maximum="3" Minimum="0" TickFrequency="1" Value="2" Style="{StaticResource SliderStyle}"/>
+                <TextBlock Text="{Binding Maximum, ElementName=sldEmissionSignature}" Style="{StaticResource TextBlockStyle}"/>
+
+            </StackPanel>
+
+            <TextBlock Grid.Column="3" x:Name="txbShowEmissionSignature" Text="{Binding ElementName=sldEmissionSignature,Path=Value,StringFormat=F2,Mode=TwoWay}"
+                       Style="{StaticResource ShowParameterTextBlockStyle}"/>
+        </Grid>
+
+        <!--TargetIntentRow-->
+        <Grid Grid.Row="11" x:Name="TargetIntentRow" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="160"/>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" x:Name="lblTargetIntent" Content="TargetIntent :" ToolTip="هدف از پرواز" Style="{StaticResource LeftTitleLabelStyle}"/>
+
+            <StackPanel Grid.Column="1" Style="{StaticResource {x:Type StackPanel}}">
+                <RadioButton x:Name="rdbMilitary" IsChecked="True" GroupName="TargetIntent" Content="Military"  ToolTip="نظامی" Style="{StaticResource TargetIntentRdbStyle}" />
+                <RadioButton x:Name="rdbCivilian" GroupName="TargetIntent" Content="Civilian" ToolTip="تجاری" Style="{StaticResource TargetIntentRdbStyle}"/>
+            </StackPanel>
+
+            <Label Grid.Column="2" x:Name="lblFlightPathPredictability" Content="FlightPathPredictability :" ToolTip="الگوی حرکت هدف" Style="{StaticResource LeftTitleLabelStyle}"/>
+
+            <StackPanel Grid.Column="3" Style="{StaticResource {x:Type StackPanel}}">
+                <RadioButton x:Name="rdbStraight" GroupName="FlightPathPredictability" Content="Straight"  ToolTip="مسیر مستقیم : مانند هواپیمای مسافربری" Style="{StaticResource TargetIntentRdbStyle}" />
+                <RadioButton x:Name="rdbEvasive" IsChecked="True" GroupName="FlightPathPredictability" Content="Evasive" ToolTip="مانوری : مانند جنگنده" Style="{StaticResource TargetIntentRdbStyle}"/>
+                <RadioButton x:Name="rdbErratic" GroupName="FlightPathPredictability" Content="Erratic" ToolTip="بی قاعده : تغییر مسیرغیر قابل پیش بینی مانند کواد کوپتر" Style="{StaticResource TargetIntentRdbStyle}"/>
+                <RadioButton x:Name="rdbPredictable" GroupName="FlightPathPredictability" Content="Predictable" ToolTip="قابل پیش بینی : مانند موشک کروز" Width="90" Style="{StaticResource TargetIntentRdbStyle}"/>
+            </StackPanel>
+
+        </Grid>
+
+        <!--SeparatorLine-->
+        <Grid Grid.Row="12" x:Name="LineGrid" Height="2" Background="DarkGray" Margin="5 0 5 0"/>
+
+        <!--ResultNameRow-->
+        <Grid Grid.Row="13" x:Name="ResultNameRow" Margin="5 0 5 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="170"/>
+                <ColumnDefinition Width="105"/>
+                <ColumnDefinition Width="105"/>
+                <ColumnDefinition Width="105"/>
+                <ColumnDefinition Width="105"/>
+                <ColumnDefinition Width="105"/>
+                <ColumnDefinition Width="105"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" x:Name="TitleOfPrediction" Content="Title Of Prediction :" ToolTip="عناوین پیش بینی" Style="{StaticResource LeftTitleLabelStyle}"/>
+
+            <TextBlock Grid.Column="1"  x:Name="txbPassengerAircraft" Text="AirPlane"
+                       Style="{StaticResource TextBlockStyle}"/>
+
+            <TextBlock Grid.Column="2" x:Name="txbFighterAircraft" Text="Fighter"
+                       Style="{StaticResource TextBlockStyle}"/>
+
+            <TextBlock Grid.Column="3" x:Name="txbCruiseMissile" Text="Cruise"
+                       Style="{StaticResource TextBlockStyle}"/>
+
+            <TextBlock Grid.Column="4" x:Name="txbGuidedBomb" Text="Bomb"
+                       Style="{StaticResource TextBlockStyle}"/>
+
+            <TextBlock Grid.Column="5" x:Name="txbHelicopterName" Text="Helicopter"
+                       Style="{StaticResource TextBlockStyle}"/>
+
+            <TextBlock Grid.Column="6" x:Name="txbDroneName" Text="Drone"
+                       Style="{StaticResource TextBlockStyle}"/>
+        </Grid>
+
+        <!--ResultRow-->
+        <Grid Grid.Row="14" Height="60" x:Name="ResultRow" Margin="5 0 5 0">
+            <Grid.ColumnDefinitions>
+
+                <ColumnDefinition Width="170"/>
+                <ColumnDefinition Width="105"/>
+                <ColumnDefinition Width="105"/>
+                <ColumnDefinition Width="105"/>
+                <ColumnDefinition Width="105"/>
+                <ColumnDefinition Width="105"/>
+                <ColumnDefinition Width="105"/>
+            </Grid.ColumnDefinitions>
+            <!--<CheckBox x:Name="chkDegree" IsEnabled="False" ToolTip="تغییر آنتن به 30 تا 60 درجه" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="False" Unchecked="ChkDegree_OnUnchecked" Checked="ChkDegree_OnChecked"/>-->
+            <Label Grid.Column="0" Content="Target Image :" x:Name="lblchk" ToolTip="تصاویر اهداف" VerticalAlignment="Center" FontWeight="Bold" Foreground="DarkSlateBlue" FontSize="14" HorizontalAlignment="Center"/>
+            <Image Grid.Column="1" Source="Images/PassengerAircraft.png" Style="{StaticResource TargetImageStyle}"/>
+            <Image Grid.Column="2" Source="Images/FighterAircraft.png" Style="{StaticResource TargetImageStyle}"/>
+            <Image Grid.Column="3" Source="Images/CruiseMissile.png" Style="{StaticResource TargetImageStyle}"/>
+            <Image Grid.Column="4" Source="Images/GuidedBomb.png" Style="{StaticResource TargetImageStyle}"/>
+            <Image Grid.Column="5" Source="Images/Helicopter.png" Style="{StaticResource TargetImageStyle}"/>
+            <Image Grid.Column="6" Source="Images/Drone.png" Style="{StaticResource TargetImageStyle}"/>
+
+        </Grid>
+
+        <!--ShowResultRow-->
+        <Grid Grid.Row="15" x:Name="ShowResultRow" Margin="5 0 5 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="105"/>
+                <ColumnDefinition Width="105"/>
+                <ColumnDefinition Width="105"/>
+                <ColumnDefinition Width="105"/>
+                <ColumnDefinition Width="105"/>
+                <ColumnDefinition Width="105"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Content="Prediction" x:Name="btnPrediction" Click="BtnPrediction_OnClick"  ToolTip="انجام پیش بینی" Style="{StaticResource ButtonStyle}"/>
+            <Button Grid.Column="1" Content="Reset" x:Name="btnreset" Click="Btnreset_OnClick" IsEnabled="False"  ToolTip="بازنشانی اطلاعات" Style="{StaticResource ButtonStyle}"/>
+
+            <Label Grid.Column="2" x:Name="txbAirPlane" Height="30"
+                       Style="{StaticResource LeftTitleLabelStyle}"/>
+
+            <Label Grid.Column="3" x:Name="txbFighter" Height="30"
+                       Style="{StaticResource LeftTitleLabelStyle}"/>
+
+            <Label Grid.Column="4" x:Name="txbCruise" Height="30"
+                       Style="{StaticResource LeftTitleLabelStyle}"/>
+
+            <Label Grid.Column="5" x:Name="txbBomb" Height="30"
+                       Style="{StaticResource LeftTitleLabelStyle}"/>
+
+            <Label Grid.Column="6" x:Name="txbHelicopter" Height="30"
+                       Style="{StaticResource LeftTitleLabelStyle}"/>
+
+            <Label Grid.Column="7" x:Name="txbDrone" Height="30"
+                       Style="{StaticResource LeftTitleLabelStyle}"/>
+        </Grid>
+
+        <!--ProgressBarRow-->
+        <Grid Grid.Row="16" x:Name="ProgressBarRow" Margin="5 0 5 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="160"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Content="Developer : M.Bakhtiyariha" ToolTip="توسعه دهنده نرم افزار : محسن بختیاری ها" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DarkGray"/>
+
+            <Label Grid.Column="1" x:Name="lblProgressBar" Content="{Binding predictedType}" Style="{StaticResource LeftTitleLabelStyle}" VerticalAlignment="Center"/>
+
+            <ProgressBar Grid.Column="2" x:Name="progressBarConfidence" Visibility="Hidden" Style="{StaticResource PercentProgressBar}" VerticalAlignment="Center"/>
+        </Grid>
+
+    </Grid>
+</Window>
