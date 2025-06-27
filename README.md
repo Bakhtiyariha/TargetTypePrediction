@@ -42,8 +42,6 @@ Follow these steps to get the project up and running on your local machine.
 git clone [https://github.com/Bakhtiyariha/HesabDari.App.git](https://github.com/Bakhtiyariha/HesabDari.App.git)
 
 ---
----
-
 <a name="فارسی"></a>
 
 # 🧾 پروژه حسابداری ساده - ویندوز فرم
