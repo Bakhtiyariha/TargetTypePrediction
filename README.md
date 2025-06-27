@@ -1,55 +1,42 @@
-﻿[English](#english) | [فارسی](#فارسی)
+[English](#english) | [فارسی](#فارسی)
 
 ---
 
 <a name="english"></a>
 
-# Radar Target Type Prediction
+# 🧾 Simple Accounting - Windows Forms Project
 
-## About The Project
+## About This Project
 
-This is an AI-powered application developed with **ML.NET** and a **WPF (Windows Presentation Foundation)** user interface. The primary goal of this project is to predict the type of targets detected by radar systems based on received data.
+This project is an educational desktop application for simple accounting, developed using **C#** and **Windows Forms**. Its primary purpose is to serve as a practical learning resource for developers who are new to building database-driven applications with WinForms and SQL Server.
 
-This application serves as a foundational prototype for analyzing and classifying radar signals and has the potential to be expanded for more complex and precise use cases.
+It covers fundamental concepts such as database connectivity, CRUD operations (Create, Read, Update, Delete), and building a user-friendly interface for data management.
 
-## Current Status
+## ✨ Features
 
-The project is currently in its initial development stages and requires further improvement and expansion, particularly in the following areas:
+- **Chart of Accounts:** Manage and categorize financial accounts.
+- **Journal Entries:** Record daily financial transactions (debits and credits).
+- **Basic Reporting:** View simple reports like account ledgers.
+- **Data Management:** Simple forms for adding, editing, and deleting records.
 
--   Optimizing the Machine Learning (ML) models
--   Increasing prediction accuracy
--   Enhancing the user interface (UI/UX)
--   Adding new data analysis features
+## 💻 Tech Stack
 
-## How to Contribute
+- **.NET Framework**
+- **C# (C-Sharp)**
+- **Windows Forms (WinForms)**
+- **Microsoft SQL Server**
 
-This is an open-source project, and we invite all enthusiasts in the fields of Artificial Intelligence, Machine Learning, and Signal Processing to collaborate. If you are interested in contributing to the development of this project, please feel free to get in touch via the **Issues** section or by submitting a **Pull Request**.
+## 🚀 Getting Started
 
-We welcome your contributions!
+Follow these steps to get the project up and running on your local machine.
 
----
+### Prerequisites
 
-<a name="فارسی"></a>
+- **Visual Studio** 2019 or later.
+- **Microsoft SQL Server** 2017 or later (Express edition is sufficient).
+- **SQL Server Management Studio (SSMS)**.
 
-# پیش‌بینی نوع هدف راداری
+### 1. Clone the Repository
 
-## معرفی پروژه
-
-این پروژه یک نرم‌افزار هوش مصنوعی است که با استفاده از **ML.NET** و رابط کاربری **WPF (Windows Presentation Foundation)** توسعه داده شده است. هدف اصلی این پروژه، پیش‌بینی نوع اهداف شناسایی‌شده توسط سیستم‌های راداری بر اساس داده‌های دریافتی است.
-
-این نرم‌افزار به عنوان یک نمونه اولیه و پایه برای تحلیل و طبقه‌بندی سیگنال‌های راداری عمل می‌کند و قابلیت توسعه برای کاربردهای پیچیده‌تر و دقیق‌تر را داراست.
-
-## وضعیت فعلی پروژه
-
-پروژه در حال حاضر در مراحل اولیه توسعه قرار دارد و نیازمند بهبود و گسترش در بخش‌های زیر است:
-
--   بهینه‌سازی مدل‌های یادگیری ماشین (ML)
--   افزایش دقت پیش‌بینی
--   توسعه رابط کاربری (UI/UX)
--   افزودن قابلیت‌های جدید برای تحلیل داده‌ها
-
-## دعوت به مشارکت (Contribution)
-
-این یک پروژه متن‌باز است و از تمام دوستانی که علاقه‌مند به حوزه‌های هوش مصنوعی، یادگیری ماشین و پردازش سیگنال هستند، دعوت به همکاری می‌شود. اگر تمایل دارید در توسعه این پروژه مشارکت کنید، لطفاً از طریق بخش **Issues** یا ارسال **Pull Request** با ما در ارتباط باشید.
-
-از مشارکت شما استقبال می‌کنیم!
+```bash
+git clone [https://github.com/Bakhtiyariha/HesabDari.App.git](https://github.com/Bakhtiyariha/HesabDari.App.git)
